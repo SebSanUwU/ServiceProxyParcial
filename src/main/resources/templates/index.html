@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Form with GET lineal search</h1>
+<form action="/robin">
+    <label for="list">List:</label><br>
+    <input type="text" id="list" name="list" value="1,2,3,4,..."><br><br>
+    <label for="value">Value:</label><br>
+    <input type="text" id="value" name="value" value="3"><br><br>
+    <input type="button" value="Submit" onclick="loadGetMsg()">
+</form>
+<div id="getrespmsg"></div>
+
+<script>
+    function loadGetMsg() {
+        let listVar = document.getElementById("list").value;
+        let valueVar = document.getElementById("value").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("getrespmsg").innerHTML =
+            this.responseText;
+        }
+        xhttp.open("GET", "/robin?list="+listVar+"&value="+valueVar+"&search=linearsearch");
+        xhttp.send();
+    }
+</script>
+
+<h1>Form with GET binary search</h1>
+<form action="/robin">
+    <label for="list">List:</label><br>
+    <input type="text" id="list1" name="list" value="1,2,3,4,..."><br><br>
+    <label for="value">Value:</label><br>
+    <input type="text" id="value2" name="value" value="3"><br><br>
+    <input type="button" value="Submit" onclick="loadGetMsgBS()">
+</form>
+
+<div id="postrespmsg"></div>
+
+<script>
+    function loadGetMsgBS(){
+        let listVar = document.getElementById("list1").value;
+        let valueVar = document.getElementById("value2").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            document.getElementById("postrespmsg").innerHTML =
+            this.responseText;
+        }
+        xhttp.open("GET", "/robin?list="+listVar+"&value="+valueVar+"&search=binarysearch");
+        xhttp.send();
+    }
+</script>
+</body>
+</html>
